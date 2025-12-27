@@ -23,10 +23,10 @@ graph TD
   ```
   
 ## 🔄 The Medallion Data Pipeline
-1. Bronze (Raw): Extracted raw JSON responses from the Spotify API for `Playlist#1` into initial staging tables.
-2. Silver (Filtered): Cleaned, deduplicated, and normalized track data using PySpark and SparkSQL to handle nested structures.
-3. Gold (Curated Star Schema): Engineered 6 final Delta Tables optimized for ACID compliance and performance.
-4. Semantic Modeling: Integrated the Gold Layer into Power BI and engineered a Star Schema, managing all tracks with complex active/inactive relationships.
+1. _**Bronze (Raw)**_: Extracted raw JSON responses from the Spotify API for `Playlist#1` into initial staging tables.
+2. _**Silver (Filtered)**_: Cleaned, deduplicated, and normalized track data using PySpark and SparkSQL to handle nested structures.
+3. _**Gold (Curated Star Schema)**_: Engineered 6 final Delta Tables optimized for ACID compliance and performance.
+4. _**Semantic Modeling**_: Integrated the Gold Layer into Power BI and engineered a Star Schema, managing all tracks with complex active/inactive relationships.
 
 ## Technical Highlights
 - **Data Engineering**: Engineered a robust ETL pipeline in Azure Databricks using Python and Spark to automate data cleaning.
@@ -36,22 +36,38 @@ graph TD
 - **Search Integration**: Enabled a search bar within the Artist Slicer for instant navigation through all the tracks in the playlist#1
 
 ## Data Model (ERD)
-The backend architecture is a high-performance Star Schema consisting of 6 curated Gold Layer tables, engineered for granular drill-down and real-time responsiveness.
-Central Fact Table:
-  - _fact_track_breakdown_: The core engine containing individual stream counts, track durations, and popularity metrics.
-Dimension Tables:
-  - _dim_artist_stats_: Detailed artist-level metrics and metadata.
-  - _dim_album_stats_: Album-level attributes for hierarchical analysis.
-  - _dim_date_dimension_: Time-intelligence table for trend analysis across days, months, and years.
-  - _dim_timeline_trends_: Specialized dimension for tracking historical listening behavior over time.
-  - _dim_top_tier_tracks_: Filtered dimension identifying high-engagement tracks for focused reporting.
-Dynamic Filtering:
-  - The model supports seamless cross-filtering; for instance, selecting a specific node in the AI Decomposition Tree instantly updates the global "Total Tracks" KPI to reflect the current selection (e.g., from 147 down to 1).
+High-performance Star Schema with 6 Gold Layer tables:
+Central Fact: _fact_track_breakdown_ (streams, durations, popularity)
+Dimensions: 
+➜ _dim_artist_stats_
+➜ _dim_album_stats_  
+➜ _dim_date_dimension_
+➜ _dim_timeline_trends_
+➜ _dim_top_tier_tracks_
+Dynamic cross-filtering: AI Tree selection updates "Total Tracks" KPI (147 → 1)
+
+## Star Schema Data Model
+
+![Star Schema Model](analytics-visuals/star-schema-model.png)
+
+*Power BI semantic model with fact_track_breakdown and 6 Delta tables relationships.*
+
 
 ## Dashboard Features
-Loyalty Score Card: A glowing hero metric displaying user engagement.
-Listening Trends: Line chart identifying peak listening periods by month/year.
-Dual Top Artist Metrics: Comparative analysis of Top Artists by both Listening Minutes and Track Count.
-Weekly Activity Pulse: Bar chart highlighting the most active days of the week.
+| Feature               | Description                                                           |
+| --------------------- | --------------------------------------------------------------------- |
+| Loyalty Score         | A glowing hero metric displaying user engagement.                     |
+| Decomposition Tree    | AI drill-down: Artist → Album → Track → Duration.                     |
+| Listening Trends      | Line chart: Peak periods by month/year                                |
+| Dual Artist Metrics   | Listening Minutes vs Track Count comparison (Engagement vs Volume)    |
+| Weekly Activity Pulse | Bar chart: Most active days of week                                   |
+
+## PowerBI Dashboard
+
+![Spotify Command Center](analytics-visuals/spotify-playlist-db.gif)
+
+*Interactive "Floating Neon" dashboard with 8 synchronized visuals and filtering.*
+
+---
 
 _**Created with love for music and data 🎵**_
