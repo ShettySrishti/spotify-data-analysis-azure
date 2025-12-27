@@ -5,7 +5,7 @@ An end-to-end ETL pipeline that transforms raw Spotify API data into an interact
 ## Tech Stack
 - **Cloud**: Azure Databricks
 - **Processing**: Python, PySpark, SparkSQL
-- **API**: Spotify API
+- **API**: Spotify Web API (via Spotipy library)
 - **Storage**: Delta Lake (Bronze/Silver/Gold). All 6 tables are stored as ACID compliant Delta tables in the default Databricks SQL database, ensuring data integrity and high-speed retrieval for Power BI.
 - **BI & Modeling**: Power BI Desktop (Star Schema / DAX)
 
@@ -30,10 +30,11 @@ graph TD
 
 ## Technical Highlights
 - **Data Engineering**: Engineered a robust ETL pipeline in Azure Databricks using Python and Spark to automate data cleaning.
+- **API Integration**: Python ETL notebooks in Databricks use the Spotipy client to authenticate and pull playlist and track metadata from the Spotify Web API.
 - **Behavioral DAX**: Authored a custom "Loyalty Score" metric using advanced logic to quantify user dedication to specific artists.
 - **AI-Driven Insights**: Implemented an interactive Decomposition Tree for root-cause analysis from Artist popularity down to individual Track Duration.
 - **UI/UX Design**: Built a sleek, "Floating Neon" Dark-Mode interface optimized for high-density reporting without visual noise.
-- **Search Integration**: Enabled a search bar within the Artist Slicer for instant navigation through all the tracks in the playlist#1
+- **Search Integration**: Enabled a search bar within the Artist Slicer for instant navigation through all the tracks in the `Playlist#1`.
 
 ## Data Model (ERD)
 High-performance Star Schema with 6 Gold Layer tables:
