@@ -37,14 +37,14 @@ graph TD
 
 ## Data Model (ERD)
 High-performance Star Schema with 6 Gold Layer tables:
-Central Fact: _fact_track_breakdown_ (streams, durations, popularity)
-Dimensions: 
+- Central Fact: _fact_track_breakdown_ (streams, durations, popularity)
+- Dimensions: 
 ➜ _dim_artist_stats_
 ➜ _dim_album_stats_  
 ➜ _dim_date_dimension_
 ➜ _dim_timeline_trends_
 ➜ _dim_top_tier_tracks_
-Dynamic cross-filtering: AI Tree selection updates "Total Tracks" KPI (147 → 1)
+- Dynamic cross-filtering: AI Tree selection updates "Total Tracks" KPI (147 → 1)
 
 ## Star Schema Data Model
 
@@ -63,11 +63,9 @@ Dynamic cross-filtering: AI Tree selection updates "Total Tracks" KPI (147 → 1
 | Weekly Activity Pulse | Bar chart: Most active days of week                                   |
 
 ## PowerBI Dashboard
-![Dashboard Overview](analytics-visuals/dashboard-spotify-command-center.png)
 ![Spotify Command Center](analytics-visuals/dashboard-spotify-command-center.gif)
 
 *Interactive "Floating Neon" dashboard with 8 synchronized visuals and filtering.*
 
 ---
-
 _**Created with love for music and data 🎵**_
